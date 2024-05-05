@@ -215,14 +215,14 @@ def main():
         st.subheader("Clasificación")
         st.markdown("<hr style='margin-top: 2px; margin-bottom: 15px;'>", unsafe_allow_html=True)
         st.write("Por favor ingrese la descripción quirurjica del Paciente: ")  
-        descripcion = "No complicaciones" #user_input_text()
+        descripcion = user_input_text() #"No complicaciones"
         if st.button("Predecir"):
             try:
                 if descripcion:
                     # Ruta al archivo del modelo .sav
                     model_path = "Models/modelo_y_tokenizador.sav"
                     
-                    loaded_model, loaded_tokenizer = load_model_and_tokenizer(model_path)
+                    #loaded_model, loaded_tokenizer = load_model_and_tokenizer(model_path)
                     
                     # Cargar el modelo
                     #loaded_model = load_model(model_path)
