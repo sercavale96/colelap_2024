@@ -7,11 +7,11 @@ import sklearn
 import requests
 import numpy as np
 import requests
-from transformers import BertTokenizer, BertForSequenceClassification
+#from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 from PIL import Image
 from pathlib import Path
-from transformers import AutoConfig, AutoModelForSequenceClassification, AutoTokenizer
+#from transformers import AutoConfig, AutoModelForSequenceClassification, AutoTokenizer
 import joblib
 
 # Configurar opciones de la página
