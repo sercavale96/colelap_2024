@@ -6,3 +6,5 @@ matplotlib
 pillow
 Flask
 gunicorn
+transformers
+torch

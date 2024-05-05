@@ -76,7 +76,7 @@ def load_model_and_tokenizer(model_path):
 
     return loaded_model, loaded_tokenizer
 
-# Método para realizar predicciones
+# Método para realizar predicciones - Modelo BERT
 def predict(text, model, tokenizer):
     # Encode the input text
     encoded_text = tokenizer(text, return_tensors="pt")
