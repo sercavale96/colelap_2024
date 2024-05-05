@@ -90,7 +90,6 @@ def predict(text, model, tokenizer):
 def main():
     folder = 'data'
     archivo_data = 'COLELAP_ETIQUETA_SES.xlsx'
-    #data = pd.read_csv(folder + '/' + archivo_data, sep=',')
     data = pd.read_excel(folder + '/' + archivo_data)
     # Diccionario para mapear clases a etiquetas
     clase_etiqueta = {0: "Baja", 1: "Media", 2: "Alta"}
