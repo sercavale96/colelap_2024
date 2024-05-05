@@ -19,7 +19,6 @@ st.set_page_config(
     page_title="Clasificación COLELAP",
     page_icon="🏥",  
     layout="wide", 
-    #initial_sidebar_state="collapsed"
 )
 
 def user_input_text():
