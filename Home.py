@@ -183,12 +183,17 @@ def main():
         st.write("¡Top 5!")
         st.dataframe(d.head())
         st.markdown("<hr style='margin-top: 2px; margin-bottom: 15px;'>", unsafe_allow_html=True)
-        col1, col2 = st.columns(2)
+        
+        # Divide la pantalla en cuatro columnas
+        col1, col2, col3 = st.columns(3)
+        
         with col1:
             conteo = d['Juicio Experto'].value_counts()
+            conteo.name = "Cantidad"  # Cambia "Conteo" por el nombre que desees
             st.write("¡Distribución general de los datos!")
-            st.dataframe(conteo)
-            st.write("")
+            st.dataframe(conteo, width=350)
+
+        with col2:
             # Configurar el estilo de la gráfica
             sns.set(style="whitegrid")
             # Crear una figura y un eje usando Matplotlib
@@ -201,16 +206,17 @@ def main():
             ax.set_title("Distribución de género")
             # Mostrar la figura en Streamlit
             st.pyplot(fig2)
-        with col2:    
+
+        with col3:    
             # Graficar la distribución de los datos como una gráfica de torta
             st.write("")
             plt.rcParams['font.size'] = 13
             inidices = conteo.index.tolist()
             fig, ax = plt.subplots()
-            ax.pie(list(conteo.values),labels = inidices, autopct='%1.1f%%', startangle=90)
+            ax.pie(list(conteo.values), labels=inidices, autopct='%1.1f%%', startangle=90)
             ax.axis('equal')  
             st.pyplot(fig)
-            st.write("")
+        st.markdown("<hr style='margin-top: 2px; margin-bottom: 15px;'>", unsafe_allow_html=True)
     elif option == "Predicciones":
         st.subheader("Clasificación")
         st.markdown("<hr style='margin-top: 2px; margin-bottom: 15px;'>", unsafe_allow_html=True)
