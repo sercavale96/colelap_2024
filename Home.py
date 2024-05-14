@@ -95,8 +95,6 @@ def main():
     clase_etiqueta = {0: "Baja", 1: "Media", 2: "Alta"}
     d = data.copy()
     d.drop('Razon', axis=1, inplace=True)
-    d.drop('Documento', axis=1, inplace=True)
-    d.drop('Nombres', axis=1, inplace=True)
     d.drop('CUPS', axis=1, inplace=True)
     d.drop('Des CUPS', axis=1, inplace=True)
     d.drop('Fecha', axis=1, inplace=True)
