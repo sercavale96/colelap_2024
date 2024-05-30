@@ -26,10 +26,10 @@ def user_input_text():
 
 import requests
 
-def solicitud_API(muestra: list):
+def solicitud_API(muestra: str):
     # URL de la API
-    urlApi = 'https://apiml2gei2023.azurewebsites.net/predict'
-
+    #urlApi = 'https://apiml2gei2023.azurewebsites.net/predict'
+    urlApi = 'http://127.0.0.1:8000/predict'
     # Preparar datos para la solicitud
     data = {
         "text": muestra  # Asumiendo que la API espera el texto de entrada como "text"
@@ -223,27 +223,23 @@ def main():
         if st.button("Predecir"):
             try:
                 if descripcion:
-                    # Ruta al archivo del modelo .sav
-                    model_path = "Models/modelo_y_tokenizador.sav"
-                    
-                    #loaded_model, loaded_tokenizer = load_model_and_tokenizer(model_path)
-                    
-                    # Cargar el modelo
-                    #loaded_model = load_model(model_path)
                     
                     # Realiza la predicción con tu modelo preentrenado (solicitud_API)                    
-                    prediction = "Baja"#predict(descripcion, loaded_model, loaded_tokenizer)
+                    prediction = solicitud_API(descripcion) #predict(descripcion, loaded_model, loaded_tokenizer)
     
                     # Mapea la predicción a una descripción
-                    prediction_descriptions = {
-                        "Baja": '✅ Baja: El nivel de complejidad de este procedimiento es Bajo.',
-                        "Media": '⚠️ Media: El nivel de complejidad de este procedimiento es Moderado.',
-                        "Alta": '❌ Alta: El nivel de complejidad de este procedimiento es Alto.'
+                    # Mapea las predicciones numéricas a las descripciones
+                    prediction_descriptions_numeric = {
+                        0: '✅ Baja: El nivel de complejidad de este procedimiento es Bajo.',
+                        1: '⚠️ Media: El nivel de complejidad de este procedimiento es Moderado.',
+                        2: '❌ Alta: El nivel de complejidad de este procedimiento es Alto.'
                     }
                     
                     # Muestra el resultado de la predicción
-                    if prediction in prediction_descriptions:
-                        st.success(prediction_descriptions[prediction])
+                    if prediction is not None:
+                        prediction_description = prediction_descriptions_numeric.get(prediction)
+                        if prediction_description is not None:
+                            st.success(prediction_description)
                     else:
                         st.warning("La predicción no tiene una descripción asociada.")
                 else:
