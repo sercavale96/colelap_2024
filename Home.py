@@ -28,8 +28,9 @@ import requests
 
 def solicitud_API(muestra: str):
     # URL de la API
-    #urlApi = 'https://apiml2gei2023.azurewebsites.net/predict'
-    urlApi = 'http://127.0.0.1:8000/predict'
+    #urlApi = 'https://colelap2024.azurewebsites.net/predict'
+    #urlApi = 'http://127.0.0.1:8000/predict'
+    urlApi = 'https://apicolelap2024.azurewebsites.net/predict'
     # Preparar datos para la solicitud
     data = {
         "text": muestra  # Asumiendo que la API espera el texto de entrada como "text"
