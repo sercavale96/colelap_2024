@@ -227,7 +227,7 @@ def main():
                     
                     # Realiza la predicción con tu modelo preentrenado (solicitud_API)                    
                     prediction = solicitud_API(descripcion) #predict(descripcion, loaded_model, loaded_tokenizer)
-    
+                    st.write(prediction)
                     # Mapea la predicción a una descripción
                     # Mapea las predicciones numéricas a las descripciones
                     prediction_descriptions_numeric = {
