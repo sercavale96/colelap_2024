@@ -7,11 +7,9 @@ import sklearn
 import requests
 import numpy as np
 import requests
-#from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 from PIL import Image
 from pathlib import Path
-#from transformers import AutoConfig, AutoModelForSequenceClassification, AutoTokenizer
 import joblib
 
 # Configurar opciones de la página
@@ -30,7 +28,6 @@ def solicitud_API(muestra: str):
     # URL de la API
     #urlApi = 'https://colelap2024.azurewebsites.net/predict'
     urlApi = 'http://127.0.0.1:8000/predict'
-    #urlApi = 'https://apicolelap2024.azurewebsites.net/predict'
     # Preparar datos para la solicitud
     data = {
         "text": muestra  # Asumiendo que la API espera el texto de entrada como "text"
@@ -118,9 +115,6 @@ def main():
          'media': 'Media', 'media ': 'Media', 'ALTA': 'Alta', 'baja':'Baja', 'alta ':'Alta'}
     # Reemplazando la estandarización en la bd
     d['Juicio Experto'] = d['Juicio Experto'].replace(mapeo)
-
-    #d['Juicio Experto'] = d['Juicio Experto'].replace(clase_etiqueta)
-    #caracteristicas = d.drop(['Juicio Experto'], axis=1)
     image = Image.open("Images/logo-ses-hospital-universitario-de-caldas.png")
 
     # Define el tamaño máximo en píxeles (ancho, alto)
@@ -138,8 +132,6 @@ def main():
     new_height = int(image.height * scale)
     image = image.resize((new_width, new_height))
 
-    # Ajusta el tamaño de la imagen para que se ajuste mejor al diseño
-    #image = image.resize((50, 50))
     st.sidebar.image(image)
 
     # Barra lateral a la izquierda
@@ -163,7 +155,7 @@ def main():
         imagen_url = "Images/colelap.webp"
         # Muestra la imagen en la página
         # Center the image using a container with CSS class
-        col1, col2 = st.columns(2)  # Create two columns
+        col1, col2 = st.columns(2)  
         with col1:
             st.image(imagen_url, width=500)  # Display the image in the right column
 
@@ -220,7 +212,7 @@ def main():
         st.subheader("Clasificación")
         st.markdown("<hr style='margin-top: 2px; margin-bottom: 15px;'>", unsafe_allow_html=True)
         st.write("Por favor ingrese la descripción quirurjica del Paciente: ")  
-        descripcion = user_input_text() #"No complicaciones"
+        descripcion = user_input_text()
         if st.button("Predecir"):
             try:
                 if descripcion:
@@ -252,7 +244,6 @@ def main():
             except Exception as e:
                 st.error("❌ Ocurrió un error al realizar la predicción: " + str(e))
                 raise RuntimeError("Error al cargar el modelo: {}".format(e))
-
 
 if __name__ == "__main__":
     main()
