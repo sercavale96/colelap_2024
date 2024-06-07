@@ -29,8 +29,8 @@ import requests
 def solicitud_API(muestra: str):
     # URL de la API
     #urlApi = 'https://colelap2024.azurewebsites.net/predict'
-    #urlApi = 'http://127.0.0.1:8000/predict'
-    urlApi = 'https://apicolelap2024.azurewebsites.net/predict'
+    urlApi = 'http://127.0.0.1:8000/predict'
+    #urlApi = 'https://apicolelap2024.azurewebsites.net/predict'
     # Preparar datos para la solicitud
     data = {
         "text": muestra  # Asumiendo que la API espera el texto de entrada como "text"
@@ -227,8 +227,7 @@ def main():
                     
                     # Realiza la predicción con tu modelo preentrenado (solicitud_API)                    
                     prediction = solicitud_API(descripcion) #predict(descripcion, loaded_model, loaded_tokenizer)
-                    st.write(prediction)
-                    # Mapea la predicción a una descripción
+                    
                     # Mapea las predicciones numéricas a las descripciones
                     prediction_descriptions_numeric = {
                         0: '✅ Baja: El nivel de complejidad de este procedimiento es Bajo.',
@@ -240,7 +239,12 @@ def main():
                     if prediction is not None:
                         prediction_description = prediction_descriptions_numeric.get(prediction)
                         if prediction_description is not None:
-                            st.success(prediction_description)
+                            if prediction == 0:
+                                st.success(prediction_description)
+                            elif prediction == 1:
+                                st.warning(prediction_description)
+                            elif prediction == 2:
+                                st.error(prediction_description)
                     else:
                         st.warning("La predicción no tiene una descripción asociada.")
                 else:
