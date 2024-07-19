@@ -26,8 +26,8 @@ import requests
 
 def solicitud_API(muestra: str):
     # URL de la API
-    #urlApi = 'https://colelap2024.azurewebsites.net/predict'
-    urlApi = 'http://127.0.0.1:8000/predict'
+    urlApi = 'https://api-colelap-ses.onrender.com/predict'
+    #urlApi = 'http://127.0.0.1:8000/predict'
     # Preparar datos para la solicitud
     data = {
         "text": muestra  # Asumiendo que la API espera el texto de entrada como "text"
