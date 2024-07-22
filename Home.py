@@ -2,14 +2,10 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pickle
-import sklearn
 import requests
-import numpy as np
 import requests
 import torch
 from PIL import Image
-from pathlib import Path
 import joblib
 
 # Configurar opciones de la página
@@ -22,12 +18,9 @@ st.set_page_config(
 def user_input_text():
     return st.text_area("Ingrese la descripción:")
 
-import requests
-
 def solicitud_API(muestra: str):
     # URL de la API
     urlApi = 'https://api-colelap-ses.onrender.com/predict'
-    #urlApi = 'http://127.0.0.1:8000/predict'
     # Preparar datos para la solicitud
     data = {
         "text": muestra  # Asumiendo que la API espera el texto de entrada como "text"
