@@ -207,36 +207,37 @@ def main():
         st.write("Por favor ingrese la descripción quirurjica del Paciente: ")  
         descripcion = user_input_text()
         if st.button("Predecir"):
-            try:
-                if descripcion:
-                    
-                    # Realiza la predicción con tu modelo preentrenado (solicitud_API)                    
-                    prediction = solicitud_API(descripcion) #predict(descripcion, loaded_model, loaded_tokenizer)
-                    
-                    # Mapea las predicciones numéricas a las descripciones
-                    prediction_descriptions_numeric = {
-                        0: '✅ Baja: El nivel de complejidad de este procedimiento es Bajo.',
-                        1: '⚠️ Media: El nivel de complejidad de este procedimiento es Moderado.',
-                        2: '❌ Alta: El nivel de complejidad de este procedimiento es Alto.'
-                    }
-                    
-                    # Muestra el resultado de la predicción
-                    if prediction is not None:
-                        prediction_description = prediction_descriptions_numeric.get(prediction)
-                        if prediction_description is not None:
-                            if prediction == 0:
-                                st.success(prediction_description)
-                            elif prediction == 1:
-                                st.warning(prediction_description)
-                            elif prediction == 2:
-                                st.error(prediction_description)
+            with st.spinner("Esperando respuesta del Modelo..."):
+                try:
+                    if descripcion:
+                        
+                        # Realiza la predicción con tu modelo preentrenado (solicitud_API)                    
+                        prediction = solicitud_API(descripcion) #predict(descripcion, loaded_model, loaded_tokenizer)
+                        
+                        # Mapea las predicciones numéricas a las descripciones
+                        prediction_descriptions_numeric = {
+                            0: '✅ Baja: El nivel de complejidad de este procedimiento es Bajo.',
+                            1: '⚠️ Media: El nivel de complejidad de este procedimiento es Moderado.',
+                            2: '❌ Alta: El nivel de complejidad de este procedimiento es Alto.'
+                        }
+                        
+                        # Muestra el resultado de la predicción
+                        if prediction is not None:
+                            prediction_description = prediction_descriptions_numeric.get(prediction)
+                            if prediction_description is not None:
+                                if prediction == 0:
+                                    st.success(prediction_description)
+                                elif prediction == 1:
+                                    st.warning(prediction_description)
+                                elif prediction == 2:
+                                    st.error(prediction_description)
+                        else:
+                            st.warning("La predicción no tiene una descripción asociada.")
                     else:
-                        st.warning("La predicción no tiene una descripción asociada.")
-                else:
-                    st.warning("⚠️ Por favor ingrese una descripción para realizar la predicción.")
-            except Exception as e:
-                st.error("❌ Ocurrió un error al realizar la predicción: " + str(e))
-                raise RuntimeError("Error al cargar el modelo: {}".format(e))
+                        st.warning("⚠️ Por favor ingrese una descripción para realizar la predicción.")
+                except Exception as e:
+                    st.error("❌ Ocurrió un error al realizar la predicción: " + str(e))
+                    raise RuntimeError("Error al cargar el modelo: {}".format(e))
 
 if __name__ == "__main__":
     main()
