@@ -23,7 +23,7 @@ def solicitud_API(muestra: str):
     urlApi = 'https://api-colelap-ses.onrender.com/predict'
     # Preparar datos para la solicitud
     data = {
-        "text": muestra  # Asumiendo que la API espera el texto de entrada como "text"
+        "text": muestra
     }
 
     # Enviar solicitud POST a la API
